@@ -1,7 +1,5 @@
 import 'dart:async';
 import 'dart:math';
-
-import 'package:clock_app/constants/theme_data.dart';
 import 'package:flutter/material.dart';
 
 class ClockView extends StatefulWidget {
@@ -51,10 +49,6 @@ class _ClockViewState extends State<ClockView> {
 class ClockPainter extends CustomPainter {
   var dateTime = DateTime.now();
 
-  //60sec - 360, 1 sec - 6degrees
-  //60min - 360, 1 min - 6degrees
-  //12hours - 360, 1 hour - 30degrees, 60min - 30degrees, 1 min - 0.5degrees
-
   @override
   void paint(Canvas canvas, Size size) {
     var centerX = size.width / 2;
@@ -62,23 +56,21 @@ class ClockPainter extends CustomPainter {
     var center = Offset(centerX, centerY);
     var radius = min(centerX, centerY);
 
-    var fillBrush = Paint()..color = CustomColors.clockBG;
-    var outlineBrush = Paint()
-      ..color = CustomColors.clockOutline
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = size.width / 20;
-    var centerDotBrush = Paint()..color = CustomColors.clockOutline;
+    var centerDotBrush = Paint()..color = Colors.white;
 
     var secHandBrush = Paint()
-      ..color = CustomColors.secHandColor
+      ..shader = RadialGradient(colors: [
+        Colors.white,
+        Colors.blueAccent
+      ]).createShader(Rect.fromCircle(center: center, radius: radius))
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round
       ..strokeWidth = size.width / 60;
 
     var minHandBrush = Paint()
       ..shader = RadialGradient(colors: [
-        CustomColors.minHandStatColor,
-        CustomColors.minHandEndColor
+        Colors.white,
+        Colors.blueAccent
       ]).createShader(Rect.fromCircle(center: center, radius: radius))
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round
@@ -86,20 +78,18 @@ class ClockPainter extends CustomPainter {
 
     var hourHandBrush = Paint()
       ..shader = RadialGradient(colors: [
-        CustomColors.hourHandStatColor,
-        CustomColors.hourHandEndColor
+        Colors.white,
+        Colors.blueAccent
       ]).createShader(Rect.fromCircle(center: center, radius: radius))
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round
       ..strokeWidth = size.width / 24;
 
     var dashBrush = Paint()
-      ..color = CustomColors.clockOutline
+      ..color = Colors.white
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1;
 
-    canvas.drawCircle(center, radius * 0.75, fillBrush);
-    canvas.drawCircle(center, radius * 0.75, outlineBrush);
 
     var hourHandX = centerX +
         radius *
@@ -123,7 +113,7 @@ class ClockPainter extends CustomPainter {
 
     var outerRadius = radius;
     var innerRadius = radius * 0.9;
-    for (var i = 0; i < 360; i += 12) {
+    for (var i = 0; i < 360; i += 30) {
       var x1 = centerX + outerRadius * cos(i * pi / 180);
       var y1 = centerY + outerRadius * sin(i * pi / 180);
 

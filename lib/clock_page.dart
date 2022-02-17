@@ -1,9 +1,6 @@
 import 'dart:async';
-
-import 'package:clock_app/constants/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 import 'clockview.dart';
 
 class ClockPage extends StatefulWidget {
@@ -27,15 +24,9 @@ class _ClockPageState extends State<ClockPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Flexible(
-            flex: 1,
-            fit: FlexFit.tight,
             child: Text(
               'Clock',
-              style: TextStyle(
-                  fontFamily: 'avenir',
-                  fontWeight: FontWeight.w700,
-                  color: CustomColors.primaryTextColor,
-                  fontSize: 24),
+              style: TextStyle(fontWeight: FontWeight.w700, color: Colors.blueGrey[100], fontSize: 36),
             ),
           ),
           Flexible(
@@ -46,17 +37,13 @@ class _ClockPageState extends State<ClockPage> {
                 DigitalClockWidget(),
                 Text(
                   formattedDate,
-                  style: TextStyle(
-                      fontFamily: 'avenir',
-                      fontWeight: FontWeight.w300,
-                      color: CustomColors.primaryTextColor,
-                      fontSize: 20),
+                  style: TextStyle(fontWeight: FontWeight.w300, color: Colors.white, fontSize: 20),
                 ),
               ],
             ),
           ),
           Flexible(
-            flex: 4,
+            flex: 3,
             fit: FlexFit.tight,
             child: Align(
               alignment: Alignment.center,
@@ -74,25 +61,20 @@ class _ClockPageState extends State<ClockPage> {
                 Text(
                   'Timezone',
                   style: TextStyle(
-                      fontFamily: 'avenir',
-                      fontWeight: FontWeight.w500,
-                      color: CustomColors.primaryTextColor,
-                      fontSize: 24),
+                      fontWeight: FontWeight.w500, color: Colors.white,
+                      fontSize: 20),
                 ),
-                SizedBox(height: 16),
+                SizedBox(height: 10),
                 Row(
                   children: <Widget>[
                     Icon(
                       Icons.language,
-                      color: CustomColors.primaryTextColor,
+                      color: Colors.white,
                     ),
                     SizedBox(width: 16),
                     Text(
                       'UTC' + offsetSign + timezoneString,
-                      style: TextStyle(
-                          fontFamily: 'avenir',
-                          color: CustomColors.primaryTextColor,
-                          fontSize: 14),
+                      style: TextStyle(color: Colors.white, fontSize: 14),
                     ),
                   ],
                 ),
@@ -143,10 +125,7 @@ class DigitalClockWidgetState extends State<DigitalClockWidget> {
     print('=====>digital clock updated');
     return Text(
       formattedTime,
-      style: TextStyle(
-          fontFamily: 'avenir',
-          color: CustomColors.primaryTextColor,
-          fontSize: 64),
+      style: TextStyle(color: Colors.white, fontSize: 64),
     );
   }
 }
